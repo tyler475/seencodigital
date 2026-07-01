@@ -382,6 +382,7 @@ addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
   const v=document.getElementById('heroVid');
   if(!v) return;
   if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if(matchMedia('(max-width: 768px)').matches) return; // mobile: show poster only, skip video download
   const load=()=>{ if(v.dataset.loaded) return; v.dataset.loaded=1;
     const s=document.createElement('source'); s.type='video/mp4';
     s.src="assets/hero.mp4"; v.appendChild(s); v.load(); v.play().catch(()=>{}); };
