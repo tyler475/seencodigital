@@ -1,0 +1,42 @@
+{
+  "brand": "seen",
+  "description": "Hosted brand logo variants for seen. Each is the 'seen' wordmark. Fetch this manifest to choose the right file for a given background.",
+  "baseUrl": "https://seencodigital.com/assets/",
+  "variants": [
+    {
+      "name": "obsidian",
+      "url": "https://seencodigital.com/assets/seen-logo.svg",
+      "format": "svg",
+      "wordmarkColor": "white",
+      "accentColor": "gold",
+      "background": "solid obsidian / black",
+      "hasOwnBackground": true,
+      "useWhen": "Self-contained dark badge. Drops onto any surface since it carries its own black background. Good default/primary."
+    },
+    {
+      "name": "gold-transparent",
+      "url": "https://seencodigital.com/assets/seen-logo-gold.svg",
+      "format": "svg",
+      "wordmarkColor": "gold",
+      "accentColor": "black",
+      "background": "transparent",
+      "hasOwnBackground": false,
+      "useWhen": "Place on white or light backgrounds. Transparent, so it composites over any light surface."
+    },
+    {
+      "name": "tan",
+      "url": "https://seencodigital.com/assets/seen-logo-tan.svg",
+      "format": "svg",
+      "wordmarkColor": "white",
+      "accentColor": "black",
+      "background": "solid tan / gold",
+      "hasOwnBackground": true,
+      "useWhen": "Self-contained warm badge. Carries its own tan background."
+    }
+  ],
+  "guidance": {
+    "onDarkBackground": "seen-logo.svg (obsidian, self-contained) or seen-logo-gold.svg (transparent gold)",
+    "onLightBackground": "seen-logo-gold.svg (transparent gold)",
+    "primary": "seen-logo.svg"
+  }
+}
