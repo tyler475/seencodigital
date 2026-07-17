@@ -74,7 +74,46 @@ option{background:var(--surface-2)}
 .count.ok{color:#5ec98a}
 .count.err{color:#e0736a}
 .req{color:var(--magenta);font-weight:500}
-@media (max-width:560px){.grid{grid-template-columns:1fr}}
+
+/* section picker */
+.picker{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toggle{position:relative;display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:15px 16px;cursor:pointer;transition:border-color .18s,background .18s}
+.toggle:hover{border-color:rgba(222,44,194,.4)}
+.toggle.on{border-color:var(--magenta);background:rgba(222,44,194,.06)}
+.toggle input{position:absolute;opacity:0;pointer-events:none}
+.toggle .box{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);margin-top:1px;display:flex;align-items:center;justify-content:center;transition:.18s}
+.toggle.on .box{background:var(--magenta);border-color:var(--magenta)}
+.toggle .box svg{width:13px;height:13px;stroke:#fff;stroke-width:3;fill:none;opacity:0}
+.toggle.on .box svg{opacity:1}
+.toggle .tg-t{display:block;font-weight:600;font-size:14px;color:var(--text)}
+.toggle .tg-d{display:block;font-size:12px;color:var(--muted);margin-top:2px;line-height:1.45}
+.toggle .lock{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.06em}
+.toggle.core{cursor:default;opacity:.9}
+.toggle.core:hover{border-color:var(--line)}
+
+/* reveal panels for chosen sections */
+.panel{display:none;margin-top:14px;padding:18px;border:1px solid var(--line);border-left:2px solid var(--magenta);border-radius:10px;background:var(--surface)}
+.panel.show{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.panel h4{font-family:'Space Grotesk',sans-serif;font-size:15px;margin-bottom:14px;color:var(--text)}
+
+/* pastor / team variant switch */
+.variant{display:flex;gap:8px;margin-bottom:16px}
+.variant label{flex:1;margin:0;text-align:center;border:1px solid var(--line);border-radius:9px;padding:10px;cursor:pointer;font-size:13px;transition:.18s}
+.variant input{position:absolute;opacity:0}
+.variant label.on{border-color:var(--magenta);background:rgba(222,44,194,.08);color:var(--text)}
+
+/* repeatable rows (team members, events) */
+.rowset{display:flex;flex-direction:column;gap:12px}
+.row{border:1px solid var(--line);border-radius:10px;padding:14px;position:relative;background:var(--surface-2)}
+.row .del{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;padding:2px 6px}
+.row .del:hover{color:var(--magenta)}
+.addrow{margin-top:12px;background:none;border:1px dashed var(--line);color:var(--muted);border-radius:9px;padding:11px;width:100%;cursor:pointer;font-size:13px;font-weight:500;transition:.18s}
+.addrow:hover{border-color:var(--magenta);color:var(--text)}
+.miniupload{display:flex;align-items:center;gap:10px;margin-top:10px}
+.miniupload .drop{flex:1;padding:12px;font-size:12px}
+.miniupload .chip{flex:none}
+@media (max-width:560px){.grid,.picker{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -120,24 +159,74 @@ option{background:var(--surface-2)}
   </fieldset>
 
   <fieldset>
-    <legend><b>03</b> Your story</legend>
+    <legend><b>03</b> Your story &amp; ministries</legend>
     <div class="f full"><label>Tell us about your church</label>
       <textarea name="about" required style="min-height:130px" placeholder="Who you are, who you're for, what you believe, and what makes you, you. Write it however it comes out — we'll shape it into your site copy."></textarea>
     </div>
-    <div class="grid">
-      <div class="f"><label>Lead pastor's name <span class="opt">(optional)</span></label><input name="pastorName" placeholder="John Smith"></div>
-      <div class="f"><label>Their title <span class="opt">(optional)</span></label><input name="pastorTitle" placeholder="Lead Pastor"></div>
-    </div>
-    <div class="f full"><label>A short welcome from the pastor <span class="opt">(optional)</span></label>
-      <textarea name="pastorWelcome" placeholder="A sentence or two welcoming new people — in the pastor's own voice."></textarea>
+    <div class="f full"><label>Your ministries &amp; programs</label>
+      <textarea name="ministries" placeholder="Kids, Students, Small Groups, Worship, Outreach, Missions, Recovery... list them and a few words on each if you like."></textarea>
+      <div class="hint">Just the names is fine — we'll write short descriptions for any you don't.</div>
     </div>
   </fieldset>
 
   <fieldset>
-    <legend><b>04</b> Ministries &amp; programs</legend>
-    <div class="f full"><label>What do you offer?</label>
-      <textarea name="ministries" placeholder="Kids, Students, Small Groups, Worship, Outreach, Missions, Recovery... list them and a few words on each if you like."></textarea>
-      <div class="hint">Just the names is fine — we'll write short descriptions for any you don't.</div>
+    <legend><b>04</b> Choose your sections</legend>
+    <p class="hint" style="margin-bottom:18px">Every site includes your <b style="color:var(--text)">service times</b>, <b style="color:var(--text)">ministries</b>, and a <b style="color:var(--text)">giving</b> section. Pick the extra sections you'd like below — we build only what you choose.</p>
+    <div class="picker">
+      <label class="toggle on" data-sec="leadership"><input type="checkbox" name="sec_leadership" checked><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Leadership</span><span class="tg-d">Your pastor, or your whole team</span></span></label>
+      <label class="toggle on" data-sec="expect"><input type="checkbox" name="sec_expect" checked><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">What to expect</span><span class="tg-d">Help first-timers feel ready to visit</span></span></label>
+      <label class="toggle on" data-sec="story"><input type="checkbox" name="sec_story" checked><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Our story</span><span class="tg-d">A narrative section about your church</span></span></label>
+      <label class="toggle on" data-sec="gallery"><input type="checkbox" name="sec_gallery" checked><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Photo gallery</span><span class="tg-d">A grid of church-life photos</span></span></label>
+      <label class="toggle" data-sec="events"><input type="checkbox" name="sec_events"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Events</span><span class="tg-d">Upcoming or recurring gatherings</span></span></label>
+    </div>
+
+    <!-- Leadership -->
+    <div class="panel show" id="p-leadership">
+      <h4>Leadership</h4>
+      <div class="variant" id="leadVariant">
+        <label class="on"><input type="radio" name="leadership" value="pastor" checked> One pastor</label>
+        <label><input type="radio" name="leadership" value="team"> A team of people</label>
+      </div>
+      <div id="leadPastor">
+        <div class="grid">
+          <div class="f"><label>Pastor's name</label><input name="pastorName" placeholder="John Smith"></div>
+          <div class="f"><label>Their title</label><input name="pastorTitle" placeholder="Lead Pastor"></div>
+        </div>
+        <div class="f full"><label>A short welcome from the pastor <span class="opt">(optional)</span></label>
+          <textarea name="pastorWelcome" placeholder="A sentence or two welcoming new people — in the pastor's own voice."></textarea>
+        </div>
+        <div class="f full"><label>Photo of the pastor <span class="opt">(optional)</span></label>
+          <label class="drop" id="pastorDrop"><input type="file" id="pastorInput" accept="image/*" hidden><span>Drag a photo, or <u>browse</u></span></label>
+          <div class="filelist" id="pastorList"></div>
+        </div>
+      </div>
+      <div id="leadTeam" style="display:none">
+        <div class="rowset" id="teamRows"></div>
+        <button type="button" class="addrow" id="addTeam">+ Add a team member</button>
+      </div>
+    </div>
+
+    <!-- Our story photo -->
+    <div class="panel show" id="p-story">
+      <h4>Our story</h4>
+      <div class="hint">We'll use your story answer above. Add a photo if you'd like one beside it.</div>
+      <label class="drop" id="storyDrop" style="margin-top:10px"><input type="file" id="storyInput" accept="image/*" hidden><span>Story photo (optional) — <u>browse</u></span></label>
+      <div class="filelist" id="storyList"></div>
+    </div>
+
+    <!-- Gallery -->
+    <div class="panel show" id="p-gallery">
+      <h4>Photo gallery</h4>
+      <label class="drop" id="galleryDrop"><input type="file" id="galleryInput" accept="image/*" multiple hidden><span>Drag photos, or <u>browse</u> — add several at once</span></label>
+      <div class="hint">Real photos of your people and place. 4–8 looks great.</div>
+      <div class="filelist" id="galleryList"></div>
+    </div>
+
+    <!-- Events -->
+    <div class="panel" id="p-events">
+      <h4>Events</h4>
+      <div class="rowset" id="eventRows"></div>
+      <button type="button" class="addrow" id="addEvent">+ Add an event</button>
     </div>
   </fieldset>
 
@@ -159,30 +248,30 @@ option{background:var(--surface-2)}
       </div>
     </div>
     <div class="f full"><label>Your logo <span class="opt">(PNG or SVG best — optional)</span></label>
-      <label class="drop" id="logoDrop">
-        <input type="file" id="logoInput" accept="image/*" hidden>
-        <span>Drag your logo here, or <u>browse</u></span>
-      </label>
+      <label class="drop" id="logoDrop"><input type="file" id="logoInput" accept="image/*" hidden><span>Drag your logo here, or <u>browse</u></span></label>
       <div class="filelist" id="logoList"></div>
     </div>
-    <div class="f full"><label>Photos <span class="req">— at least 4</span></label>
-      <label class="drop" id="photoDrop">
-        <input type="file" id="photoInput" accept="image/*" multiple hidden>
-        <span>Drag photos here, or <u>browse</u> — add several at once</span>
-      </label>
-      <div class="hint">One wide, welcoming shot for the top of the page, one of your pastor, and a few of church life (kids, groups, serving). More is better.</div>
-      <div class="filelist" id="photoList"></div>
-      <div class="count" id="photoCount">0 of 4 minimum</div>
+    <div class="f full"><label>Main homepage photo <span class="req">— required</span></label>
+      <label class="drop" id="heroDrop"><input type="file" id="heroInput" accept="image/*" hidden><span>Drag your best wide, welcoming shot, or <u>browse</u></span></label>
+      <div class="hint">The big image at the top of your site — a warm, wide photo of your people or space works best.</div>
+      <div class="filelist" id="heroList"></div>
+      <div class="count" id="heroCount">no photo yet</div>
     </div>
   </fieldset>
 
   <fieldset>
-    <legend><b>06</b> Links</legend>
+    <legend><b>06</b> Links &amp; social</legend>
     <div class="grid">
       <div class="f"><label>Online giving link <span class="opt">(optional)</span></label><input name="givingLink" type="url" placeholder="https://..."></div>
       <div class="f"><label>Livestream / watch link <span class="opt">(optional)</span></label><input name="watchLink" type="url" placeholder="https://youtube.com/..."></div>
-      <div class="f full"><label>Social links <span class="opt">(optional)</span></label><input name="socials" placeholder="Facebook, Instagram, YouTube URLs"></div>
+      <div class="f"><label>Instagram <span class="opt">(optional)</span></label><input name="instagram" type="url" placeholder="https://instagram.com/yourchurch"></div>
+      <div class="f"><label>Facebook <span class="opt">(optional)</span></label><input name="facebook" type="url" placeholder="https://facebook.com/yourchurch"></div>
+      <div class="f"><label>YouTube <span class="opt">(optional)</span></label><input name="youtube" type="url" placeholder="https://youtube.com/@yourchurch"></div>
+      <div class="f"><label>TikTok <span class="opt">(optional)</span></label><input name="tiktok" type="url" placeholder="https://tiktok.com/@yourchurch"></div>
+      <div class="f"><label>X / Twitter <span class="opt">(optional)</span></label><input name="twitter" type="url" placeholder="https://x.com/yourchurch"></div>
+      <div class="f"><label>Other link <span class="opt">(Spotify, website…)</span></label><input name="website" type="url" placeholder="https://..."></div>
     </div>
+    <div class="hint">We'll only add an icon for the accounts you fill in — blanks are skipped.</div>
   </fieldset>
 
   <fieldset>
@@ -201,40 +290,38 @@ option{background:var(--surface-2)}
 </form>
 
 <script>
-// keep the hex text + color picker in sync
-(function(){
-  var c=document.querySelector('input[name=brandColor]'), h=document.querySelector('input[name=brandColorHex]');
-  if(c&&h){ c.addEventListener('input',function(){h.value=c.value.toUpperCase()}); h.addEventListener('input',function(){ if(/^#[0-9a-fA-F]{6}$/.test(h.value)) c.value=h.value; }); }
-})();
-
-// intake form → Google Sheet (Apps Script Web App). Paste your deployed URL below.
 const INTAKE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxj479ckWqrh_MdW0d7rugByn2i1aPMj8d_nyrFM72qSICu0gnvyOs4CRcBeKGjDAjJHg/exec';
-(function(){
-  const form = document.getElementById('intake');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    const fd = new FormData(form); const payload = {};
-    fd.forEach(function(v,k){ payload[k]=v; });
-    payload.brandColor = payload.brandColorHex || payload.brandColor;  // prefer the hex text
-    const btn = form.querySelector('button[type=submit]');
-    function thanks(){ document.body.innerHTML = '<div class="thanks wrap"><div class="eyebrow" style="text-align:center">// got it</div><h2>Thank you — we\'re on it.</h2><p>Your church is in good hands. We\'ll build your site and email you a preview link to review, usually within a few days.</p></div>'; window.scrollTo(0,0); }
-    if(!INTAKE_ENDPOINT){ thanks(); return; }  // safe fallback until the endpoint is wired
-    btn.disabled = true; btn.textContent = 'Sending…';
-    fetch(INTAKE_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
-      .then(thanks).catch(thanks);
-  });
-})();
 
-// ---- file uploads (logo + photos) ----
 (function(){
-  var MIN_PHOTOS = 4;
   var form = document.getElementById('intake');
-  var logoList = document.getElementById('logoList');
-  var photoList = document.getElementById('photoList');
-  var countEl = document.getElementById('photoCount');
-  var logoFile = null, photoFiles = [];
-
+  var $ = function(id){ return document.getElementById(id); };
   function isImg(f){ return f && /^image\//.test(f.type); }
+
+  // ---- brand color sync ----
+  (function(){
+    var c=form.querySelector('input[name=brandColor]'), h=form.querySelector('input[name=brandColorHex]');
+    if(c&&h){ c.addEventListener('input',function(){h.value=c.value.toUpperCase()}); h.addEventListener('input',function(){ if(/^#[0-9a-fA-F]{6}$/.test(h.value)) c.value=h.value; }); }
+  })();
+
+  // ---- section picker: toggle cards show/hide their panels ----
+  document.querySelectorAll('.toggle[data-sec]').forEach(function(t){
+    var sec=t.getAttribute('data-sec'), cb=t.querySelector('input'), panel=$('p-'+sec);
+    function sync(){ t.classList.toggle('on',cb.checked); if(panel) panel.classList.toggle('show',cb.checked); }
+    cb.addEventListener('change',sync); sync();
+  });
+
+  // ---- leadership variant (pastor / team) ----
+  var leadPastor=$('leadPastor'), leadTeam=$('leadTeam');
+  document.querySelectorAll('#leadVariant input').forEach(function(r){
+    r.addEventListener('change',function(){
+      document.querySelectorAll('#leadVariant label').forEach(function(l){ l.classList.toggle('on', l.contains(r)&&r.checked); });
+      var team = document.querySelector('#leadVariant input:checked').value==='team';
+      leadPastor.style.display = team?'none':''; leadTeam.style.display = team?'':'none';
+      if(team && !$('teamRows').children.length) addTeam();
+    });
+  });
+
+  // ---- image helpers ----
   function chip(file, onRemove){
     var d=document.createElement('div'); d.className='chip';
     var img=document.createElement('img'); img.src=URL.createObjectURL(file);
@@ -242,64 +329,137 @@ const INTAKE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxj479ckWqrh_Md
     var b=document.createElement('button'); b.type='button'; b.innerHTML='&times;'; b.setAttribute('aria-label','Remove'); b.onclick=onRemove;
     d.appendChild(img); d.appendChild(nm); d.appendChild(b); return d;
   }
-  function renderLogo(){ logoList.innerHTML=''; if(logoFile) logoList.appendChild(chip(logoFile,function(){ logoFile=null; renderLogo(); })); }
-  function renderPhotos(){
-    photoList.innerHTML='';
-    photoFiles.forEach(function(f,i){ photoList.appendChild(chip(f,function(){ photoFiles.splice(i,1); renderPhotos(); })); });
-    var n=photoFiles.length;
-    countEl.textContent = n>=MIN_PHOTOS ? (n+' photos ✓') : (n+' of '+MIN_PHOTOS+' minimum');
-    countEl.className='count '+(n>=MIN_PHOTOS?'ok':(n>0?'err':''));
-  }
-  document.getElementById('logoInput').addEventListener('change',function(){ if(isImg(this.files[0])){ logoFile=this.files[0]; renderLogo(); } this.value=''; });
-  document.getElementById('photoInput').addEventListener('change',function(){ Array.prototype.forEach.call(this.files,function(f){ if(isImg(f)) photoFiles.push(f); }); this.value=''; renderPhotos(); });
-
   function wireDrop(drop, add){
     ['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.add('over'); }); });
     ['dragleave','dragend'].forEach(function(ev){ drop.addEventListener(ev,function(){ drop.classList.remove('over'); }); });
     drop.addEventListener('drop',function(e){ e.preventDefault(); drop.classList.remove('over'); add(e.dataTransfer.files); });
   }
-  wireDrop(document.getElementById('logoDrop'),function(files){ if(isImg(files[0])){ logoFile=files[0]; renderLogo(); } });
-  wireDrop(document.getElementById('photoDrop'),function(files){ Array.prototype.forEach.call(files,function(f){ if(isImg(f)) photoFiles.push(f); }); renderPhotos(); });
 
-  function readRaw(file){ return new Promise(function(res){ var r=new FileReader(); r.onload=function(){ res({name:file.name, mimeType:file.type||'application/octet-stream', data:String(r.result).split(',')[1]}); }; r.onerror=function(){res(null)}; r.readAsDataURL(file); }); }
-  function compress(file, maxDim, quality){
+  // single-image zones (logo, hero, pastor, story)
+  var singles={logo:null,hero:null,pastor:null,story:null};
+  function wireSingle(key, dropId, inputId, listId, onChange){
+    var list=$(listId);
+    function render(){ list.innerHTML=''; if(singles[key]) list.appendChild(chip(singles[key],function(){ singles[key]=null; render(); onChange&&onChange(); })); onChange&&onChange(); }
+    function set(f){ if(isImg(f)){ singles[key]=f; render(); } }
+    $(inputId).addEventListener('change',function(){ set(this.files[0]); this.value=''; });
+    wireDrop($(dropId),function(files){ set(files[0]); });
+  }
+  var heroCount=$('heroCount');
+  wireSingle('logo','logoDrop','logoInput','logoList');
+  wireSingle('hero','heroDrop','heroInput','heroList',function(){ if(singles.hero){ heroCount.textContent='ready ✓'; heroCount.className='count ok'; } else { heroCount.textContent='no photo yet'; heroCount.className='count'; } });
+  wireSingle('pastor','pastorDrop','pastorInput','pastorList');
+  wireSingle('story','storyDrop','storyInput','storyList');
+
+  // gallery (multi)
+  var gallery=[]; var galleryList=$('galleryList');
+  function renderGallery(){ galleryList.innerHTML=''; gallery.forEach(function(f,i){ galleryList.appendChild(chip(f,function(){ gallery.splice(i,1); renderGallery(); })); }); }
+  $('galleryInput').addEventListener('change',function(){ Array.prototype.forEach.call(this.files,function(f){ if(isImg(f)) gallery.push(f); }); this.value=''; renderGallery(); });
+  wireDrop($('galleryDrop'),function(files){ Array.prototype.forEach.call(files,function(f){ if(isImg(f)) gallery.push(f); }); renderGallery(); });
+
+  // ---- repeatable team members ----
+  function addTeam(){
+    var row=document.createElement('div'); row.className='row'; row._file=null;
+    row.innerHTML='<button type="button" class="del" aria-label="Remove">&times;</button>'
+      +'<div class="grid"><div class="f"><label>Name</label><input class="m-name" placeholder="Jane Doe"></div>'
+      +'<div class="f"><label>Position</label><input class="m-role" placeholder="Worship Pastor"></div></div>'
+      +'<div class="miniupload"><label class="drop m-drop"><input type="file" class="m-file" accept="image/*" hidden><span>Photo — <u>browse</u></span></label><div class="m-chip"></div></div>';
+    row.querySelector('.del').onclick=function(){ row.remove(); };
+    var mchip=row.querySelector('.m-chip'), fi=row.querySelector('.m-file');
+    function setPhoto(f){ if(!isImg(f))return; row._file=f; mchip.innerHTML=''; mchip.appendChild(chip(f,function(){ row._file=null; mchip.innerHTML=''; })); }
+    fi.addEventListener('change',function(){ setPhoto(this.files[0]); this.value=''; });
+    wireDrop(row.querySelector('.m-drop'),function(files){ setPhoto(files[0]); });
+    $('teamRows').appendChild(row);
+  }
+  $('addTeam').addEventListener('click',addTeam);
+
+  // ---- repeatable events ----
+  function addEvent(){
+    var row=document.createElement('div'); row.className='row';
+    row.innerHTML='<button type="button" class="del" aria-label="Remove">&times;</button>'
+      +'<div class="grid"><div class="f"><label>Event name</label><input class="e-name" placeholder="Fall Kickoff Sunday"></div>'
+      +'<div class="f"><label>Date</label><input class="e-date" placeholder="Sun, Sep 7"></div></div>'
+      +'<div class="f full"><label>Short description</label><input class="e-blurb" placeholder="New season, new groups, lunch after."></div>';
+    row.querySelector('.del').onclick=function(){ row.remove(); };
+    $('eventRows').appendChild(row);
+  }
+  $('addEvent').addEventListener('click',addEvent);
+
+  // ---- compression ----
+  function readRaw(file,role){ return new Promise(function(res){ var r=new FileReader(); r.onload=function(){ res({role:role,name:file.name,mimeType:file.type||'application/octet-stream',data:String(r.result).split(',')[1]}); }; r.onerror=function(){res(null)}; r.readAsDataURL(file); }); }
+  function compress(file,role,maxDim,quality){
     return new Promise(function(res){
       var img=new Image();
       img.onload=function(){
-        var s=Math.min(1, maxDim/Math.max(img.width,img.height));
+        var s=Math.min(1,maxDim/Math.max(img.width,img.height));
         var w=Math.max(1,Math.round(img.width*s)), hh=Math.max(1,Math.round(img.height*s));
         var cv=document.createElement('canvas'); cv.width=w; cv.height=hh;
         cv.getContext('2d').drawImage(img,0,0,w,hh);
-        res({name:(file.name||'photo').replace(/\.[^.]+$/,'')+'.jpg', mimeType:'image/jpeg', data:cv.toDataURL('image/jpeg',quality).split(',')[1]});
+        res({role:role,name:(file.name||'photo').replace(/\.[^.]+$/,'')+'.jpg',mimeType:'image/jpeg',data:cv.toDataURL('image/jpeg',quality).split(',')[1]});
       };
       img.onerror=function(){res(null)}; img.src=URL.createObjectURL(file);
     });
   }
-  // logos / svg / small files kept as-is (transparency, vectors); big photos compressed
-  function prep(file, o){ return (file.type==='image/svg+xml'||/png/i.test(file.type)||file.size<400*1024) ? readRaw(file) : compress(file,o.maxDim,o.quality); }
+  function prep(file,role,o){ return (file.type==='image/svg+xml'||/png/i.test(file.type)||file.size<400*1024) ? readRaw(file,role) : compress(file,role,o.maxDim,o.quality); }
 
+  // ---- which sections were chosen (in render order) ----
+  function chosenSections(){
+    var on=function(sec){ var t=document.querySelector('.toggle[data-sec="'+sec+'"] input'); return t&&t.checked; };
+    var lead=(document.querySelector('#leadVariant input:checked')||{}).value;
+    var out=['times'];
+    if(on('leadership')) out.push(lead==='team'?'team':'pastor');
+    if(on('story')) out.push('story');
+    if(on('expect')) out.push('expect');
+    out.push('ministries');
+    if(on('gallery')) out.push('gallery');
+    if(on('events')) out.push('events');
+    out.push('visit','give');
+    return out;
+  }
+  function collectTeam(){ return Array.prototype.map.call($('teamRows').children,function(r){ return {name:(r.querySelector('.m-name').value||'').trim(), role:(r.querySelector('.m-role').value||'').trim(), _file:r._file}; }).filter(function(m){ return m.name; }); }
+  function collectEvents(){ return Array.prototype.map.call($('eventRows').children,function(r){ return {name:(r.querySelector('.e-name').value||'').trim(), date:(r.querySelector('.e-date').value||'').trim(), blurb:(r.querySelector('.e-blurb').value||'').trim()}; }).filter(function(e){ return e.name; }); }
+
+  function warn(el,msg){ if(!el)return; el.scrollIntoView({behavior:'smooth',block:'center'}); alertLine(msg); }
+  var errLine=null;
+  function alertLine(msg){ if(!errLine){ errLine=document.createElement('p'); errLine.className='count err'; errLine.style.textAlign='center'; document.querySelector('.actions').prepend(errLine); } errLine.textContent=msg; }
+
+  // ---- submit ----
   var busy=false;
   form.addEventListener('submit', async function(e){
-    if(busy){ e.preventDefault(); return; }
-    if(photoFiles.length < MIN_PHOTOS){
-      e.preventDefault();
-      countEl.textContent='Please add at least '+MIN_PHOTOS+' photos ('+photoFiles.length+' so far).'; countEl.className='count err';
-      document.getElementById('photoDrop').scrollIntoView({behavior:'smooth',block:'center'}); return;
-    }
-    // capture handled here; the earlier submit handler posts text-only, so we take over fully
-    e.preventDefault(); e.stopImmediatePropagation();
+    e.preventDefault(); if(busy) return;
+    var sections=chosenSections();
+    var team=collectTeam(), events=collectEvents();
+    // light validation
+    if(!singles.hero){ return warn($('heroDrop'),'Please add a main homepage photo — it anchors the whole site.'); }
+    if(sections.indexOf('team')>-1 && team.length<2){ return warn($('leadTeam'),'Add at least two team members (or switch to a single pastor).'); }
+    if(sections.indexOf('events')>-1 && !events.length){ return warn($('eventRows'),'Add at least one event, or unpick the Events section.'); }
+    if(errLine){ errLine.remove(); errLine=null; }
+
     busy=true;
     var btn=form.querySelector('button[type=submit]'); btn.disabled=true; btn.textContent='Uploading… this can take a moment';
+
     var payload={};
     new FormData(form).forEach(function(v,k){ if(typeof v==='string') payload[k]=v; });
     payload.brandColor = payload.brandColorHex || payload.brandColor; delete payload.brandColorHex;
-    payload.logoFile = logoFile ? await prep(logoFile,{maxDim:900,quality:.92}) : null;
-    payload.photoFiles=[];
-    for(var i=0;i<photoFiles.length;i++){ var p=await prep(photoFiles[i],{maxDim:1800,quality:.82}); if(p) payload.photoFiles.push(p); }
+    // strip the raw checkbox fields; send a clean sections list + structured data
+    Object.keys(payload).forEach(function(k){ if(/^sec_/.test(k)) delete payload[k]; });
+    payload.sections = sections;
+    payload.teamMembers = team.map(function(m){ return {name:m.name, role:m.role}; });
+    payload.events = events;
+
+    // files, role-tagged
+    payload.logoFile = singles.logo ? await prep(singles.logo,'LOGO',{maxDim:900,quality:.92}) : null;
+    var photos=[];
+    if(singles.hero) photos.push(await prep(singles.hero,'HERO',{maxDim:2000,quality:.82}));
+    if(sections.indexOf('pastor')>-1 && singles.pastor) photos.push(await prep(singles.pastor,'PASTOR',{maxDim:1200,quality:.85}));
+    if(sections.indexOf('story')>-1 && singles.story) photos.push(await prep(singles.story,'STORY',{maxDim:1600,quality:.84}));
+    if(sections.indexOf('gallery')>-1){ for(var g=0;g<gallery.length;g++){ photos.push(await prep(gallery[g],'GALLERY-'+(g+1),{maxDim:1600,quality:.82})); } }
+    if(sections.indexOf('team')>-1){ for(var t=0;t<team.length;t++){ if(team[t]._file) photos.push(await prep(team[t]._file,'TEAM-'+(t+1),{maxDim:1000,quality:.85})); } }
+    payload.photoFiles = photos.filter(Boolean);
+
     function done(){ document.body.innerHTML='<div class="thanks wrap"><div class="eyebrow" style="text-align:center">// got it</div><h2>Thank you — we\'re on it.</h2><p>Your church is in good hands. We\'ll build your site and email you a preview link to review, usually within a few days.</p></div>'; window.scrollTo(0,0); }
     if(!INTAKE_ENDPOINT){ done(); return; }
     fetch(INTAKE_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).then(done).catch(done);
-  }, true);  // capture phase → runs before the text-only handler
+  });
 })();
 </script>
 </body>
