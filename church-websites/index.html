@@ -571,7 +571,7 @@ footer{border-top:1px solid var(--line);padding:36px 0}
           <li>A real person for anything beyond the editor</li>
           <li>Larger plans available as your church grows</li>
         </ul>
-        <a class="btn btn-ghost" href="#contact">Ask about care plans</a>
+        <a class="btn btn-ghost" href="https://buy.stripe.com/eVq6oA9LW2ZE7rd4jj6Zy05">Start your build</a>
       </div>
     </div>
     <p class="price-note">// the build is one-time. monthly care continues month to month and can be cancelled anytime. taxes &amp; fees not included.</p>
@@ -633,43 +633,6 @@ footer{border-top:1px solid var(--line);padding:36px 0}
   </div>
 </section>
 
-<!-- contact -->
-<section class="contact" id="contact">
-  <div class="wrap">
-    <span class="eyebrow">// start your build</span>
-    <h2 class="reveal">Your church deserves to be <em>seen.</em></h2>
-    <p class="sub reveal">Tell us about your church. We'll reply within one business day with next steps and a timeline.</p>
-    <div class="contact-grid">
-      <form id="church-form">
-        <div>
-          <label for="f-name">your name</label>
-          <input id="f-name" name="name" type="text" required autocomplete="name">
-        </div>
-        <div>
-          <label for="f-email">email</label>
-          <input id="f-email" name="email" type="email" required autocomplete="email">
-        </div>
-        <div>
-          <label for="f-church">church name &amp; city</label>
-          <input id="f-church" name="church" type="text" required>
-        </div>
-        <div>
-          <label for="f-details">tell us about your church</label>
-          <textarea id="f-details" name="details" placeholder="How long you've been around, what you have now (or don't), and which package you're leaning toward."></textarea>
-        </div>
-        <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" >
-        <button class="btn btn-primary" type="submit">Send message</button>
-      </form>
-      <div class="contact-aside">
-        <p class="big">Not sure which package fits?</p>
-        <p>Send the form anyway and tell us where your church is at. We'll recommend the right starting point, and we'll tell you honestly if the $350 build is all you need.</p>
-        <p>Ministry work is why this studio exists. If budget is the thing holding you back, say so. We'll figure it out together.</p>
-        <p class="mono-note">// replies land at <a href="mailto:tyler@seencodigital.com">tyler@seencodigital.com</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <footer>
   <div class="wrap foot-inner">
     <img class="mark" src="/assets/seen-logo-dark.svg" alt="seen.co">
@@ -715,39 +678,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   setTimeout(typeNext, 2800);
 })();
 
-// contact form → Google Sheet (Apps Script Web App).
-// Paste your deployed Web App URL below. While it's empty the form falls back to
-// mailto, so the page is never broken.
-const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzE1rMYBLz7rq8nhk4IvcV4cgdaYFlLRqc7uzHCe059rc41Rz3TpQde47EhVbELdPBX/exec';
-(function(){
-  const form = document.getElementById('church-form');
-  if(!form) return;
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    const f = new FormData(form);
-    const qs = new URLSearchParams(location.search);
-    const payload = {
-      name: f.get('name')||'', email: f.get('email')||'', church: f.get('church')||'',
-      details: f.get('details')||'', company: f.get('company')||'',   // company = honeypot
-      page: location.href,
-      utm_source: qs.get('utm_source')||'', utm_medium: qs.get('utm_medium')||'', utm_campaign: qs.get('utm_campaign')||''
-    };
-    const btn = form.querySelector('button[type=submit]');
-    function thanks(){ form.innerHTML = '<p style="color:var(--magenta);font-size:1.1rem;padding:22px 0;line-height:1.5">Thank you. Your message is in — we\'ll reply within one business day with next steps and a timeline.</p>'; }
-
-    if(!SHEET_ENDPOINT){
-      const subject = encodeURIComponent('Church website inquiry — ' + payload.church);
-      const body = encodeURIComponent('Name: '+payload.name+'\nEmail: '+payload.email+'\nChurch: '+payload.church+'\n\n'+payload.details);
-      window.location.href = 'mailto:tyler@seencodigital.com?subject='+subject+'&body='+body;
-      return;
-    }
-    if(btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
-    // Apps Script doesn't return CORS headers; text/plain avoids a preflight and
-    // no-cors makes the opaque response fine (the row still gets written).
-    fetch(SHEET_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
-      .then(thanks).catch(thanks);
-  });
-})();
 </script>
 
 </body>
