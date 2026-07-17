@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Your Church Website Intake — seen.co</title>
+<meta name="description" content="Tell us about your church and we'll build your website. seen.co church website intake.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0B0D;--surface:#141417;--surface-2:#1A1A1E;--line:rgba(255,255,255,.10);--text:#F4F4F6;--muted:#A2A2AB;--magenta:#DE2CC2}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--magenta)}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 24px}
+.mono{font-family:'JetBrains Mono',monospace}
+
+/* header */
+.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(11,11,13,.82);backdrop-filter:blur(12px);z-index:10}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.top img{height:20px}
+.top .step{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+
+.hero{padding:56px 0 8px;text-align:center}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--magenta);margin-bottom:16px}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2rem,5vw,2.9rem);letter-spacing:-.02em;line-height:1.08;margin-bottom:16px}
+.hero p{color:var(--muted);max-width:52ch;margin:0 auto;font-size:1.05rem}
+
+form{padding:44px 0 90px}
+fieldset{border:none;border-top:1px solid var(--line);padding:36px 0 4px;margin:0}
+fieldset:first-of-type{border-top:none;padding-top:8px}
+legend{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.04em;padding:0;margin-bottom:22px}
+legend b{color:var(--magenta);margin-right:8px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.f{margin-bottom:18px}
+.f.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:7px}
+label .opt{color:var(--muted);font-weight:400}
+.hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5}
+input,textarea,select{width:100%;font-family:'Inter',sans-serif;font-size:15px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 14px;outline:none;transition:border-color .18s,box-shadow .18s}
+input:focus,textarea:focus,select:focus{border-color:var(--magenta);box-shadow:0 0 0 3px rgba(222,44,194,.14)}
+input::placeholder,textarea::placeholder{color:#5f5f68}
+textarea{resize:vertical;min-height:96px}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A2A2AB' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:17px;padding-right:40px;cursor:pointer}
+option{background:var(--surface-2)}
+/* colour field */
+.color-row{display:flex;align-items:center;gap:12px}
+.color-row input[type=color]{width:52px;height:48px;padding:4px;cursor:pointer;flex:none;background:var(--surface)}
+.color-row input[type=text]{flex:1;font-family:'JetBrains Mono',monospace}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+.actions{margin-top:34px;border-top:1px solid var(--line);padding-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:600;font-size:16px;padding:16px 34px;border-radius:999px;border:none;cursor:pointer;background:var(--magenta);color:#fff;transition:transform .15s,opacity .2s;width:100%}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.6;cursor:default;transform:none}
+.fineprint{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-align:center;margin-top:16px}
+.thanks{text-align:center;padding:60px 0}
+.thanks h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;margin-bottom:12px}
+.thanks p{color:var(--muted);max-width:46ch;margin:0 auto}
+/* uploads */
+.drop{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;border:1.5px dashed var(--line);border-radius:12px;padding:26px 18px;cursor:pointer;color:var(--muted);font-size:14px;transition:border-color .18s,background .18s}
+.drop:hover,.drop.over{border-color:var(--magenta);background:rgba(222,44,194,.05);color:var(--text)}
+.drop u{color:var(--magenta);text-decoration:none;font-weight:600}
+.filelist{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.chip{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px}
+.chip img{width:38px;height:38px;object-fit:cover;border-radius:6px;display:block;background:var(--surface-2)}
+.chip .nm{font-size:12px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:17px;line-height:1;padding:0 6px}
+.chip button:hover{color:var(--magenta)}
+.count{font-family:'JetBrains Mono',monospace;font-size:12px;margin-top:10px;color:var(--muted)}
+.count.ok{color:#5ec98a}
+.count.err{color:#e0736a}
+.req{color:var(--magenta);font-weight:500}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <img src="/assets/seen-logo-dark.svg" alt="seen.co">
+    <span class="step">// church website intake</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">// let's build your site</div>
+    <h1>Tell us about your church.</h1>
+    <p>Answer what you can — the more you share, the more it'll feel like you. We'll turn this into a finished site for your review, usually within a few days. Takes about 10 minutes.</p>
+  </div>
+</section>
+
+<form id="intake" class="wrap">
+
+  <fieldset>
+    <legend><b>01</b> The basics</legend>
+    <div class="grid">
+      <div class="f"><label>Church name</label><input name="churchName" required autocomplete="organization" placeholder="Grace Community Church"></div>
+      <div class="f"><label>City &amp; state</label><input name="cityState" required placeholder="Franklin, TN"></div>
+      <div class="f full"><label>Full address <span class="opt">(for your footer &amp; map)</span></label><input name="address" placeholder="1420 Columbia Ave, Franklin, TN 37064"></div>
+      <div class="f"><label>Phone</label><input name="phone" type="tel" placeholder="(615) 555-0142"></div>
+      <div class="f"><label>Contact email</label><input name="email" type="email" required placeholder="hello@yourchurch.org"></div>
+      <div class="f full"><label>Current website <span class="opt">(if you have one)</span></label><input name="currentSite" type="url" placeholder="https://..."></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><b>02</b> Your gatherings</legend>
+    <div class="f full"><label>Service times</label>
+      <textarea name="serviceTimes" required placeholder="Sundays at 9:00 &amp; 11:00 AM (worship + kids). Wednesdays at 6:30 PM (youth &amp; groups)."></textarea>
+      <div class="hint">List every regular gathering — day, time, and what happens. We'll format it.</div>
+    </div>
+    <div class="f full"><label>What's a first visit like? <span class="opt">(optional)</span></label>
+      <textarea name="firstVisit" placeholder="Casual and friendly, coffee in the lobby, about an hour, great kids check-in..."></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><b>03</b> Your story</legend>
+    <div class="f full"><label>Tell us about your church</label>
+      <textarea name="about" required style="min-height:130px" placeholder="Who you are, who you're for, what you believe, and what makes you, you. Write it however it comes out — we'll shape it into your site copy."></textarea>
+    </div>
+    <div class="grid">
+      <div class="f"><label>Lead pastor's name <span class="opt">(optional)</span></label><input name="pastorName" placeholder="John Smith"></div>
+      <div class="f"><label>Their title <span class="opt">(optional)</span></label><input name="pastorTitle" placeholder="Lead Pastor"></div>
+    </div>
+    <div class="f full"><label>A short welcome from the pastor <span class="opt">(optional)</span></label>
+      <textarea name="pastorWelcome" placeholder="A sentence or two welcoming new people — in the pastor's own voice."></textarea>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><b>04</b> Ministries &amp; programs</legend>
+    <div class="f full"><label>What do you offer?</label>
+      <textarea name="ministries" placeholder="Kids, Students, Small Groups, Worship, Outreach, Missions, Recovery... list them and a few words on each if you like."></textarea>
+      <div class="hint">Just the names is fine — we'll write short descriptions for any you don't.</div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><b>05</b> Look &amp; feel</legend>
+    <div class="grid">
+      <div class="f"><label>Your main brand color</label>
+        <div class="color-row"><input type="color" name="brandColor" value="#C6572E"><input type="text" name="brandColorHex" value="#C6572E" aria-label="Hex color"></div>
+      </div>
+      <div class="f"><label>Overall vibe</label>
+        <select name="vibe">
+          <option value="">Pick one…</option>
+          <option>Warm &amp; welcoming</option>
+          <option>Modern &amp; bold</option>
+          <option>Classic &amp; traditional</option>
+          <option>Bright &amp; energetic</option>
+          <option>Calm &amp; reverent</option>
+        </select>
+      </div>
+    </div>
+    <div class="f full"><label>Your logo <span class="opt">(PNG or SVG best — optional)</span></label>
+      <label class="drop" id="logoDrop">
+        <input type="file" id="logoInput" accept="image/*" hidden>
+        <span>Drag your logo here, or <u>browse</u></span>
+      </label>
+      <div class="filelist" id="logoList"></div>
+    </div>
+    <div class="f full"><label>Photos <span class="req">— at least 4</span></label>
+      <label class="drop" id="photoDrop">
+        <input type="file" id="photoInput" accept="image/*" multiple hidden>
+        <span>Drag photos here, or <u>browse</u> — add several at once</span>
+      </label>
+      <div class="hint">One wide, welcoming shot for the top of the page, one of your pastor, and a few of church life (kids, groups, serving). More is better.</div>
+      <div class="filelist" id="photoList"></div>
+      <div class="count" id="photoCount">0 of 4 minimum</div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><b>06</b> Links</legend>
+    <div class="grid">
+      <div class="f"><label>Online giving link <span class="opt">(optional)</span></label><input name="givingLink" type="url" placeholder="https://..."></div>
+      <div class="f"><label>Livestream / watch link <span class="opt">(optional)</span></label><input name="watchLink" type="url" placeholder="https://youtube.com/..."></div>
+      <div class="f full"><label>Social links <span class="opt">(optional)</span></label><input name="socials" placeholder="Facebook, Instagram, YouTube URLs"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><b>07</b> Anything else</legend>
+    <div class="f full"><label>Must-haves, notes, or questions <span class="opt">(optional)</span></label>
+      <textarea name="notes" placeholder="Anything specific you want, pages you're picturing, or questions for us."></textarea>
+    </div>
+  </fieldset>
+
+  <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+  <div class="actions">
+    <button class="btn" type="submit">Send it to seen.co</button>
+    <p class="fineprint">// we'll be in touch within one business day</p>
+  </div>
+</form>
+
+<script>
+// keep the hex text + color picker in sync
+(function(){
+  var c=document.querySelector('input[name=brandColor]'), h=document.querySelector('input[name=brandColorHex]');
+  if(c&&h){ c.addEventListener('input',function(){h.value=c.value.toUpperCase()}); h.addEventListener('input',function(){ if(/^#[0-9a-fA-F]{6}$/.test(h.value)) c.value=h.value; }); }
+})();
+
+// intake form → Google Sheet (Apps Script Web App). Paste your deployed URL below.
+const INTAKE_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxj479ckWqrh_MdW0d7rugByn2i1aPMj8d_nyrFM72qSICu0gnvyOs4CRcBeKGjDAjJHg/exec';
+(function(){
+  const form = document.getElementById('intake');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const fd = new FormData(form); const payload = {};
+    fd.forEach(function(v,k){ payload[k]=v; });
+    payload.brandColor = payload.brandColorHex || payload.brandColor;  // prefer the hex text
+    const btn = form.querySelector('button[type=submit]');
+    function thanks(){ document.body.innerHTML = '<div class="thanks wrap"><div class="eyebrow" style="text-align:center">// got it</div><h2>Thank you — we\'re on it.</h2><p>Your church is in good hands. We\'ll build your site and email you a preview link to review, usually within a few days.</p></div>'; window.scrollTo(0,0); }
+    if(!INTAKE_ENDPOINT){ thanks(); return; }  // safe fallback until the endpoint is wired
+    btn.disabled = true; btn.textContent = 'Sending…';
+    fetch(INTAKE_ENDPOINT, { method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) })
+      .then(thanks).catch(thanks);
+  });
+})();
+
+// ---- file uploads (logo + photos) ----
+(function(){
+  var MIN_PHOTOS = 4;
+  var form = document.getElementById('intake');
+  var logoList = document.getElementById('logoList');
+  var photoList = document.getElementById('photoList');
+  var countEl = document.getElementById('photoCount');
+  var logoFile = null, photoFiles = [];
+
+  function isImg(f){ return f && /^image\//.test(f.type); }
+  function chip(file, onRemove){
+    var d=document.createElement('div'); d.className='chip';
+    var img=document.createElement('img'); img.src=URL.createObjectURL(file);
+    var nm=document.createElement('span'); nm.className='nm'; nm.textContent=file.name;
+    var b=document.createElement('button'); b.type='button'; b.innerHTML='&times;'; b.setAttribute('aria-label','Remove'); b.onclick=onRemove;
+    d.appendChild(img); d.appendChild(nm); d.appendChild(b); return d;
+  }
+  function renderLogo(){ logoList.innerHTML=''; if(logoFile) logoList.appendChild(chip(logoFile,function(){ logoFile=null; renderLogo(); })); }
+  function renderPhotos(){
+    photoList.innerHTML='';
+    photoFiles.forEach(function(f,i){ photoList.appendChild(chip(f,function(){ photoFiles.splice(i,1); renderPhotos(); })); });
+    var n=photoFiles.length;
+    countEl.textContent = n>=MIN_PHOTOS ? (n+' photos ✓') : (n+' of '+MIN_PHOTOS+' minimum');
+    countEl.className='count '+(n>=MIN_PHOTOS?'ok':(n>0?'err':''));
+  }
+  document.getElementById('logoInput').addEventListener('change',function(){ if(isImg(this.files[0])){ logoFile=this.files[0]; renderLogo(); } this.value=''; });
+  document.getElementById('photoInput').addEventListener('change',function(){ Array.prototype.forEach.call(this.files,function(f){ if(isImg(f)) photoFiles.push(f); }); this.value=''; renderPhotos(); });
+
+  function wireDrop(drop, add){
+    ['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+    ['dragleave','dragend'].forEach(function(ev){ drop.addEventListener(ev,function(){ drop.classList.remove('over'); }); });
+    drop.addEventListener('drop',function(e){ e.preventDefault(); drop.classList.remove('over'); add(e.dataTransfer.files); });
+  }
+  wireDrop(document.getElementById('logoDrop'),function(files){ if(isImg(files[0])){ logoFile=files[0]; renderLogo(); } });
+  wireDrop(document.getElementById('photoDrop'),function(files){ Array.prototype.forEach.call(files,function(f){ if(isImg(f)) photoFiles.push(f); }); renderPhotos(); });
+
+  function readRaw(file){ return new Promise(function(res){ var r=new FileReader(); r.onload=function(){ res({name:file.name, mimeType:file.type||'application/octet-stream', data:String(r.result).split(',')[1]}); }; r.onerror=function(){res(null)}; r.readAsDataURL(file); }); }
+  function compress(file, maxDim, quality){
+    return new Promise(function(res){
+      var img=new Image();
+      img.onload=function(){
+        var s=Math.min(1, maxDim/Math.max(img.width,img.height));
+        var w=Math.max(1,Math.round(img.width*s)), hh=Math.max(1,Math.round(img.height*s));
+        var cv=document.createElement('canvas'); cv.width=w; cv.height=hh;
+        cv.getContext('2d').drawImage(img,0,0,w,hh);
+        res({name:(file.name||'photo').replace(/\.[^.]+$/,'')+'.jpg', mimeType:'image/jpeg', data:cv.toDataURL('image/jpeg',quality).split(',')[1]});
+      };
+      img.onerror=function(){res(null)}; img.src=URL.createObjectURL(file);
+    });
+  }
+  // logos / svg / small files kept as-is (transparency, vectors); big photos compressed
+  function prep(file, o){ return (file.type==='image/svg+xml'||/png/i.test(file.type)||file.size<400*1024) ? readRaw(file) : compress(file,o.maxDim,o.quality); }
+
+  var busy=false;
+  form.addEventListener('submit', async function(e){
+    if(busy){ e.preventDefault(); return; }
+    if(photoFiles.length < MIN_PHOTOS){
+      e.preventDefault();
+      countEl.textContent='Please add at least '+MIN_PHOTOS+' photos ('+photoFiles.length+' so far).'; countEl.className='count err';
+      document.getElementById('photoDrop').scrollIntoView({behavior:'smooth',block:'center'}); return;
+    }
+    // capture handled here; the earlier submit handler posts text-only, so we take over fully
+    e.preventDefault(); e.stopImmediatePropagation();
+    busy=true;
+    var btn=form.querySelector('button[type=submit]'); btn.disabled=true; btn.textContent='Uploading… this can take a moment';
+    var payload={};
+    new FormData(form).forEach(function(v,k){ if(typeof v==='string') payload[k]=v; });
+    payload.brandColor = payload.brandColorHex || payload.brandColor; delete payload.brandColorHex;
+    payload.logoFile = logoFile ? await prep(logoFile,{maxDim:900,quality:.92}) : null;
+    payload.photoFiles=[];
+    for(var i=0;i<photoFiles.length;i++){ var p=await prep(photoFiles[i],{maxDim:1800,quality:.82}); if(p) payload.photoFiles.push(p); }
+    function done(){ document.body.innerHTML='<div class="thanks wrap"><div class="eyebrow" style="text-align:center">// got it</div><h2>Thank you — we\'re on it.</h2><p>Your church is in good hands. We\'ll build your site and email you a preview link to review, usually within a few days.</p></div>'; window.scrollTo(0,0); }
+    if(!INTAKE_ENDPOINT){ done(); return; }
+    fetch(INTAKE_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).then(done).catch(done);
+  }, true);  // capture phase → runs before the text-only handler
+})();
+</script>
+</body>
+</html>
