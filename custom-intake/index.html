@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Your Custom Website Intake — seen.co</title>
+<meta name="description" content="Tell us about your business and we'll build your custom website. seen.co bespoke website intake.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B0B0D;--surface:#141417;--surface-2:#1A1A1E;--line:rgba(255,255,255,.10);--text:#F4F4F6;--muted:#A2A2AB;--magenta:#DE2CC2}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;overflow-x:clip}
+a{color:var(--magenta)}
+.wrap{width:100%;max-width:760px;margin:0 auto;padding:0 24px}
+.mono{font-family:'JetBrains Mono',monospace}
+.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(11,11,13,.82);backdrop-filter:blur(12px);z-index:10}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:62px}
+.top img{height:20px}
+.top .step{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+.hero{padding:56px 0 8px;text-align:center}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--magenta);margin-bottom:16px}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(2rem,5vw,2.9rem);letter-spacing:-.02em;line-height:1.08;margin-bottom:16px}
+.hero p{color:var(--muted);max-width:54ch;margin:0 auto;font-size:1.05rem}
+form{padding:44px 0 90px}
+fieldset{border:none;border-top:1px solid var(--line);padding:36px 0 4px;margin:0}
+fieldset:first-of-type{border-top:none;padding-top:8px}
+legend{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.04em;padding:0;margin-bottom:22px}
+legend b{color:var(--magenta);margin-right:8px}
+.intro{color:var(--muted);font-size:13px;margin:-12px 0 20px;line-height:1.55}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.f{margin-bottom:18px}
+.f.full{grid-column:1/-1}
+label{display:block;font-size:13px;font-weight:500;color:var(--text);margin-bottom:7px}
+label .opt{color:var(--muted);font-weight:400}
+.hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5}
+input,textarea,select{width:100%;font-family:'Inter',sans-serif;font-size:15px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 14px;outline:none;transition:border-color .18s,box-shadow .18s}
+input:focus,textarea:focus,select:focus{border-color:var(--magenta);box-shadow:0 0 0 3px rgba(222,44,194,.14)}
+input::placeholder,textarea::placeholder{color:#5f5f68}
+textarea{resize:vertical;min-height:96px}
+select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A2A2AB' stroke-width='2' stroke-linecap='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:17px;padding-right:40px;cursor:pointer}
+option{background:var(--surface-2)}
+.color-row{display:flex;align-items:center;gap:12px}
+.color-row input[type=color]{width:52px;height:48px;padding:4px;cursor:pointer;flex:none;background:var(--surface)}
+.color-row input[type=text]{flex:1;font-family:'JetBrains Mono',monospace}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.actions{margin-top:34px;border-top:1px solid var(--line);padding-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;font-weight:600;font-size:16px;padding:16px 34px;border-radius:999px;border:none;cursor:pointer;background:var(--magenta);color:#fff;transition:transform .15s,opacity .2s;width:100%}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{opacity:.6;cursor:default;transform:none}
+.fineprint{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);text-align:center;margin-top:16px}
+.thanks{text-align:center;padding:60px 0}
+.thanks h2{font-family:'Space Grotesk',sans-serif;font-size:2rem;margin-bottom:12px}
+.thanks p{color:var(--muted);max-width:48ch;margin:0 auto}
+.drop{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;border:1.5px dashed var(--line);border-radius:12px;padding:26px 18px;cursor:pointer;color:var(--muted);font-size:14px;transition:border-color .18s,background .18s}
+.drop:hover,.drop.over{border-color:var(--magenta);background:rgba(222,44,194,.05);color:var(--text)}
+.drop u{color:var(--magenta);text-decoration:none;font-weight:600}
+.filelist{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.chip{display:flex;align-items:center;gap:9px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px}
+.chip img{width:38px;height:38px;object-fit:cover;border-radius:6px;display:block;background:var(--surface-2)}
+.chip .nm{font-size:12px;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:17px;line-height:1;padding:0 6px}
+.chip button:hover{color:var(--magenta)}
+.count{font-family:'JetBrains Mono',monospace;font-size:12px;margin-top:10px;color:var(--muted)}
+.count.ok{color:#5ec98a}
+.count.err{color:#e0736a}
+.req{color:var(--magenta);font-weight:500}
+.picker{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toggle{position:relative;display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:15px 16px;cursor:pointer;transition:border-color .18s,background .18s}
+.toggle:hover{border-color:rgba(222,44,194,.4)}
+.toggle.on{border-color:var(--magenta);background:rgba(222,44,194,.06)}
+.toggle input{position:absolute;opacity:0;pointer-events:none}
+.toggle .box{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid var(--line);margin-top:1px;display:flex;align-items:center;justify-content:center;transition:.18s}
+.toggle.on .box{background:var(--magenta);border-color:var(--magenta)}
+.toggle .box svg{width:13px;height:13px;stroke:#fff;stroke-width:3;fill:none;opacity:0}
+.toggle.on .box svg{opacity:1}
+.toggle .tg-t{display:block;font-weight:600;font-size:14px;color:var(--text)}
+.toggle .tg-d{display:block;font-size:12px;color:var(--muted);margin-top:2px;line-height:1.45}
+.toggle.core{cursor:default}
+.toggle.core .box{background:var(--magenta);border-color:var(--magenta)}
+.rowset{display:flex;flex-direction:column;gap:12px}
+.row{border:1px solid var(--line);border-radius:10px;padding:14px;position:relative;background:var(--surface-2)}
+.row .del{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;line-height:1;padding:2px 6px}
+.row .del:hover{color:var(--magenta)}
+.addrow{margin-top:12px;background:none;border:1px dashed var(--line);color:var(--muted);border-radius:9px;padding:11px;width:100%;cursor:pointer;font-size:13px;font-weight:500;transition:.18s}
+.addrow:hover{border-color:var(--magenta);color:var(--text)}
+@media (max-width:560px){.grid,.picker{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <img src="/assets/seen-logo-dark.svg" alt="seen.co">
+    <span class="step">// custom website intake</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">// let's build your site</div>
+    <h1>Tell us about your build.</h1>
+    <p>The more detail you give us here, the closer your first draft will be. Answer what you can — we'll turn it into a finished custom site for your review. Takes about 10–15 minutes.</p>
+  </div>
+</section>
+
+<form id="intake" class="wrap">
+
+  <!-- 01 THE BASICS -->
+  <fieldset>
+    <legend><b>01</b> The basics</legend>
+    <div class="grid">
+      <div class="f"><label>Business / brand name</label><input name="businessName" required autocomplete="organization" placeholder="Northgate Roofing"></div>
+      <div class="f"><label>Your name</label><input name="contactName" placeholder="Jane Doe"></div>
+      <div class="f"><label>Contact email</label><input name="email" type="email" required placeholder="you@business.com"></div>
+      <div class="f"><label>Phone <span class="opt">(optional)</span></label><input name="phone" type="tel" placeholder="(555) 555-0142"></div>
+      <div class="f"><label>City &amp; state <span class="opt">(optional)</span></label><input name="cityState" placeholder="Nashville, TN"></div>
+      <div class="f"><label>Current website <span class="opt">(if any)</span></label><input name="currentSite" type="url" placeholder="https://..."></div>
+    </div>
+    <div class="f full"><label>What does your business do?</label>
+      <textarea name="whatYouDo" required placeholder="A few sentences on what you offer and who you serve. Write it however it comes out — we'll shape it into your copy."></textarea>
+    </div>
+  </fieldset>
+
+  <!-- 02 THE KIND OF SITE -->
+  <fieldset>
+    <legend><b>02</b> What kind of site</legend>
+    <p class="intro">Not sure? Pick your best guess — we'll recommend the right fit.</p>
+    <div class="grid">
+      <div class="f"><label>Site type</label>
+        <select name="siteType">
+          <option value="One-page site">One-page site</option>
+          <option value="Multi-page website" selected>Multi-page website</option>
+          <option value="Landing page (single campaign)">Landing page (single campaign)</option>
+          <option value="Portfolio / showcase">Portfolio / showcase</option>
+          <option value="Online store (e-commerce)">Online store (e-commerce)</option>
+          <option value="Booking / appointments">Booking / appointments</option>
+          <option value="Blog / content site">Blog / content site</option>
+          <option value="Not sure — help us decide">Not sure — help us decide</option>
+        </select>
+      </div>
+      <div class="f"><label>Main goal of the site</label>
+        <select name="goal">
+          <option value="Generate leads / calls" selected>Generate leads / calls</option>
+          <option value="Sell products online">Sell products online</option>
+          <option value="Take bookings / appointments">Take bookings / appointments</option>
+          <option value="Showcase work / portfolio">Showcase work / portfolio</option>
+          <option value="Build credibility &amp; inform">Build credibility &amp; inform</option>
+          <option value="Grow an audience">Grow an audience</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="f"><label>Roughly how many pages?</label>
+        <select name="pageCount">
+          <option value="Just a home page">Just a home page</option>
+          <option value="2–4 pages" selected>2–4 pages</option>
+          <option value="5–8 pages">5–8 pages</option>
+          <option value="9+ pages">9+ pages</option>
+          <option value="Not sure">Not sure</option>
+        </select>
+      </div>
+      <div class="f"><label>Who's it for? <span class="opt">(your audience)</span></label><input name="audience" placeholder="Homeowners in Middle TN, 30–60"></div>
+    </div>
+  </fieldset>
+
+  <!-- 03 PAGES -->
+  <fieldset>
+    <legend><b>03</b> Pages you'll want</legend>
+    <p class="intro">Tick the pages you want. Home is always included.</p>
+    <div class="picker" id="pagePicker">
+      <label class="toggle core"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Home</span><span class="tg-d">Always included</span></span></label>
+      <label class="toggle on" data-page="About"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">About</span><span class="tg-d">Your story &amp; team</span></span></label>
+      <label class="toggle on" data-page="Services"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Services / Offerings</span><span class="tg-d">What you do, in detail</span></span></label>
+      <label class="toggle on" data-page="Contact"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Contact</span><span class="tg-d">Form, hours, map</span></span></label>
+      <label class="toggle" data-page="Portfolio / Gallery"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Portfolio / Gallery</span><span class="tg-d">Show your work</span></span></label>
+      <label class="toggle" data-page="Pricing"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Pricing</span><span class="tg-d">Packages &amp; rates</span></span></label>
+      <label class="toggle" data-page="Shop / Products"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Shop / Products</span><span class="tg-d">Sell online</span></span></label>
+      <label class="toggle" data-page="Booking"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Booking</span><span class="tg-d">Schedule appointments</span></span></label>
+      <label class="toggle" data-page="Blog / News"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Blog / News</span><span class="tg-d">Articles &amp; updates</span></span></label>
+      <label class="toggle" data-page="FAQ"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">FAQ</span><span class="tg-d">Common questions</span></span></label>
+    </div>
+    <div class="f full" style="margin-top:16px"><label>Any other pages? <span class="opt">(optional)</span></label><input name="otherPages" placeholder="e.g. Careers, Locations, Case Studies"></div>
+  </fieldset>
+
+  <!-- 04 FEATURES -->
+  <fieldset>
+    <legend><b>04</b> Features you want</legend>
+    <p class="intro">Tick anything the site should do.</p>
+    <div class="picker" id="featurePicker">
+      <label class="toggle on" data-feat="Contact form"><input type="checkbox" checked><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Contact form</span><span class="tg-d">Leads to your inbox</span></span></label>
+      <label class="toggle" data-feat="Online booking / scheduling"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Online booking</span><span class="tg-d">Scheduling / calendar</span></span></label>
+      <label class="toggle" data-feat="Online payments / store"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Payments / store</span><span class="tg-d">Sell products or services</span></span></label>
+      <label class="toggle" data-feat="Photo gallery"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Photo gallery</span><span class="tg-d">Grid / slider of images</span></span></label>
+      <label class="toggle" data-feat="Video"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Video</span><span class="tg-d">Embedded YouTube / Vimeo</span></span></label>
+      <label class="toggle" data-feat="Testimonials / reviews"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Testimonials</span><span class="tg-d">Reviews &amp; social proof</span></span></label>
+      <label class="toggle" data-feat="Pricing tables"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Pricing tables</span><span class="tg-d">Packages side by side</span></span></label>
+      <label class="toggle" data-feat="Map / location"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Map / location</span><span class="tg-d">Embedded map</span></span></label>
+      <label class="toggle" data-feat="Newsletter signup"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Newsletter signup</span><span class="tg-d">Grow an email list</span></span></label>
+      <label class="toggle" data-feat="Blog / articles"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Blog / articles</span><span class="tg-d">Publish content</span></span></label>
+      <label class="toggle" data-feat="FAQ / accordion"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">FAQ accordion</span><span class="tg-d">Expandable Q&amp;A</span></span></label>
+      <label class="toggle" data-feat="Social feed / links"><input type="checkbox"><span class="box"><svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg></span><span><span class="tg-t">Social links / feed</span><span class="tg-d">Instagram, etc.</span></span></label>
+    </div>
+    <div class="f full" style="margin-top:16px"><label>Anything else it should do? <span class="opt">(optional)</span></label><input name="otherFeatures" placeholder="e.g. member login, quote calculator, live chat, multi-language"></div>
+  </fieldset>
+
+  <!-- 05 INSPIRATION -->
+  <fieldset>
+    <legend><b>05</b> Sites you love</legend>
+    <p class="intro">Paste a few sites you'd like yours to feel like — and a few words on what you like about each (the layout, colors, energy, a specific section). This is one of the most useful things you can give us.</p>
+    <div class="rowset" id="inspoRows"></div>
+    <button type="button" class="addrow" id="addInspo">+ Add a site</button>
+    <div class="f full" style="margin-top:18px"><label>Overall style, in your words <span class="opt">(optional)</span></label>
+      <textarea name="styleWords" placeholder="e.g. Clean and premium, lots of whitespace, big photography, confident but friendly. Not corporate or cluttered."></textarea>
+    </div>
+  </fieldset>
+
+  <!-- 06 LOOK & FEEL -->
+  <fieldset>
+    <legend><b>06</b> Look &amp; feel</legend>
+    <div class="grid">
+      <div class="f"><label>Overall vibe</label>
+        <select name="vibe">
+          <option value="Bold &amp; modern">Bold &amp; modern</option>
+          <option value="Clean &amp; minimal" selected>Clean &amp; minimal</option>
+          <option value="Warm &amp; friendly">Warm &amp; friendly</option>
+          <option value="Luxury &amp; premium">Luxury &amp; premium</option>
+          <option value="Playful &amp; energetic">Playful &amp; energetic</option>
+          <option value="Corporate &amp; trustworthy">Corporate &amp; trustworthy</option>
+          <option value="Editorial &amp; elegant">Editorial &amp; elegant</option>
+          <option value="Not sure">Not sure</option>
+        </select>
+      </div>
+      <div class="f"><label>Fonts / typography <span class="opt">(optional)</span></label><input name="fonts" placeholder="A font you love, or leave it to us"></div>
+      <div class="f"><label>Main brand color</label>
+        <div class="color-row"><input type="color" name="brandColor" value="#DE2CC2"><input type="text" name="brandColorHex" value="#DE2CC2" aria-label="Hex color"></div>
+      </div>
+      <div class="f"><label>Accent color <span class="opt">(optional)</span></label>
+        <div class="color-row"><input type="color" name="accentColor" value="#0B0B0D"><input type="text" name="accentColorHex" value="#0B0B0D" aria-label="Accent hex"></div>
+      </div>
+    </div>
+    <div class="f full"><label>Your logo <span class="opt">(PNG or SVG best — optional)</span></label>
+      <label class="drop" id="logoDrop"><input type="file" id="logoInput" accept="image/*" hidden><span>Drag your logo here, or <u>browse</u></span></label>
+      <div class="filelist" id="logoList"></div>
+    </div>
+  </fieldset>
+
+  <!-- 07 YOUR CONTENT -->
+  <fieldset>
+    <legend><b>07</b> Your content</legend>
+    <div class="f full"><label>Headline / tagline <span class="opt">(optional)</span></label><input name="tagline" placeholder="The one line that sums you up"></div>
+    <div class="f full"><label>Your story <span class="opt">(who you are, why you started, what makes you different)</span></label>
+      <textarea name="story" placeholder="Write it however it comes out — we'll shape it into your About section."></textarea>
+    </div>
+    <div class="f full"><label>Your services / products <span class="opt">(list them, with a few words on each)</span></label>
+      <textarea name="services" placeholder="e.g.&#10;Roof Replacement — full tear-off and re-roof, most homes in a day.&#10;Storm Repair — insurance claims handled start to finish.&#10;Free Inspections — no-pressure, same-week."></textarea>
+    </div>
+    <div class="f full"><label>Why choose you? <span class="opt">(optional)</span></label>
+      <textarea name="sellingPoints" placeholder="Guarantees, awards, years in business, what customers always say..."></textarea>
+    </div>
+  </fieldset>
+
+  <!-- 08 ASSETS -->
+  <fieldset>
+    <legend><b>08</b> Photos &amp; video</legend>
+    <p class="intro">Real photos make a custom site. Upload what you have — we'll place and polish them. Don't have great photos? Leave it and we'll use tasteful stock while you gather yours.</p>
+    <div class="f full"><label>Main homepage / hero photo <span class="opt">(your best wide shot — recommended)</span></label>
+      <label class="drop" id="heroDrop"><input type="file" id="heroInput" accept="image/*" hidden><span>Drag your hero photo, or <u>browse</u></span></label>
+      <div class="filelist" id="heroList"></div>
+      <div class="count" id="heroCount">no photo yet</div>
+    </div>
+    <div class="f full"><label>Gallery / other photos <span class="opt">(add several at once)</span></label>
+      <label class="drop" id="galleryDrop"><input type="file" id="galleryInput" accept="image/*" multiple hidden><span>Drag photos, or <u>browse</u> — work samples, team, space, products…</span></label>
+      <div class="filelist" id="galleryList"></div>
+    </div>
+    <div class="f full"><label>Videos <span class="opt">(paste YouTube / Vimeo links)</span></label>
+      <div class="rowset" id="videoRows"></div>
+      <button type="button" class="addrow" id="addVideo">+ Add a video link</button>
+      <div class="hint">For raw video files, mention it in notes below and we'll set up a private upload.</div>
+    </div>
+    <div class="f full" style="margin-top:18px"><label>Brand assets you already have <span class="opt">(optional)</span></label>
+      <textarea name="brandAssets" placeholder="Style guide, existing graphics, fonts, product shots — tell us what exists and we'll ask for it."></textarea>
+    </div>
+  </fieldset>
+
+  <!-- 09 PRACTICAL -->
+  <fieldset>
+    <legend><b>09</b> Practical</legend>
+    <div class="grid">
+      <div class="f"><label>Do you have a domain?</label><input name="domain" placeholder="yourbusiness.com — or 'need one'"></div>
+      <div class="f"><label>Timeline</label>
+        <select name="timeline">
+          <option value="As soon as possible">As soon as possible</option>
+          <option value="Next 2–4 weeks" selected>Next 2–4 weeks</option>
+          <option value="Flexible / no rush">Flexible / no rush</option>
+        </select>
+      </div>
+    </div>
+    <div class="f full"><label>Must-haves, notes, or questions <span class="opt">(optional)</span></label>
+      <textarea name="notes" placeholder="Anything specific you're picturing, deal-breakers, or questions for us."></textarea>
+    </div>
+  </fieldset>
+
+  <div class="actions">
+    <button type="submit" class="btn">Send my build request</button>
+    <p class="fineprint">// we'll review this and email you a preview to approve</p>
+  </div>
+
+  <input type="text" name="company" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+</form>
+
+<script>
+// Bespoke intake endpoint: the portal's /api/intake route (writes to Supabase
+// build_intakes + uploads assets to the client-assets bucket). Posted no-cors,
+// so the response is opaque — we just fire and show the thank-you screen.
+const INTAKE_ENDPOINT = 'https://portal.seencodigital.com/api/intake';
+
+(function(){
+  var form = document.getElementById('intake');
+  var $ = function(id){ return document.getElementById(id); };
+  function isImg(f){ return f && /^image\//.test(f.type); }
+
+  // ---- color sync (brand + accent) ----
+  [['brandColor','brandColorHex'],['accentColor','accentColorHex']].forEach(function(pair){
+    var c=form.querySelector('input[name='+pair[0]+']'), h=form.querySelector('input[name='+pair[1]+']');
+    if(c&&h){ c.addEventListener('input',function(){h.value=c.value.toUpperCase();}); h.addEventListener('input',function(){ if(/^#[0-9a-fA-F]{6}$/.test(h.value)) c.value=h.value; }); }
+  });
+
+  // ---- multi-select toggles (pages, features) ----
+  document.querySelectorAll('.toggle:not(.core)').forEach(function(t){
+    var cb=t.querySelector('input');
+    function sync(){ t.classList.toggle('on',cb.checked); }
+    t.addEventListener('click',function(e){ if(e.target.tagName!=='INPUT'){ cb.checked=!cb.checked; } sync(); });
+    cb.addEventListener('change',sync); sync();
+  });
+  function checked(picker, attr){ return Array.prototype.filter.call($(picker).querySelectorAll('.toggle'),function(t){ var i=t.querySelector('input'); return i&&i.checked; }).map(function(t){ return t.getAttribute(attr); }).filter(Boolean); }
+
+  // ---- image helpers (chip / drop) ----
+  function chip(file, onRemove){
+    var d=document.createElement('div'); d.className='chip';
+    var img=document.createElement('img'); img.src=URL.createObjectURL(file);
+    var nm=document.createElement('span'); nm.className='nm'; nm.textContent=file.name;
+    var b=document.createElement('button'); b.type='button'; b.innerHTML='&times;'; b.setAttribute('aria-label','Remove'); b.onclick=onRemove;
+    d.appendChild(img); d.appendChild(nm); d.appendChild(b); return d;
+  }
+  function wireDrop(drop, add){
+    ['dragover','dragenter'].forEach(function(ev){ drop.addEventListener(ev,function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+    ['dragleave','dragend'].forEach(function(ev){ drop.addEventListener(ev,function(){ drop.classList.remove('over'); }); });
+    drop.addEventListener('drop',function(e){ e.preventDefault(); drop.classList.remove('over'); add(e.dataTransfer.files); });
+  }
+  var singles={logo:null,hero:null};
+  function wireSingle(key, dropId, inputId, listId, onChange){
+    var list=$(listId);
+    function render(){ list.innerHTML=''; if(singles[key]) list.appendChild(chip(singles[key],function(){ singles[key]=null; render(); onChange&&onChange(); })); onChange&&onChange(); }
+    function set(f){ if(isImg(f)){ singles[key]=f; render(); } }
+    $(inputId).addEventListener('change',function(){ set(this.files[0]); this.value=''; });
+    wireDrop($(dropId),function(files){ set(files[0]); });
+  }
+  var heroCount=$('heroCount');
+  wireSingle('logo','logoDrop','logoInput','logoList');
+  wireSingle('hero','heroDrop','heroInput','heroList',function(){ if(singles.hero){ heroCount.textContent='ready ✓'; heroCount.className='count ok'; } else { heroCount.textContent='no photo yet'; heroCount.className='count'; } });
+
+  // gallery (multi)
+  var gallery=[]; var galleryList=$('galleryList');
+  function renderGallery(){ galleryList.innerHTML=''; gallery.forEach(function(f,i){ galleryList.appendChild(chip(f,function(){ gallery.splice(i,1); renderGallery(); })); }); }
+  $('galleryInput').addEventListener('change',function(){ Array.prototype.forEach.call(this.files,function(f){ if(isImg(f)) gallery.push(f); }); this.value=''; renderGallery(); });
+  wireDrop($('galleryDrop'),function(files){ Array.prototype.forEach.call(files,function(f){ if(isImg(f)) gallery.push(f); }); renderGallery(); });
+
+  // ---- repeatable inspiration rows ----
+  function addInspo(){
+    var row=document.createElement('div'); row.className='row';
+    row.innerHTML='<button type="button" class="del" aria-label="Remove">&times;</button>'
+      +'<div class="f" style="margin-bottom:12px"><label>Site URL</label><input class="i-url" type="url" placeholder="https://a-site-you-love.com"></div>'
+      +'<div class="f" style="margin:0"><label>What you like about it</label><input class="i-note" placeholder="The clean layout, the bold hero, the way they list services…"></div>';
+    row.querySelector('.del').onclick=function(){ row.remove(); };
+    $('inspoRows').appendChild(row);
+  }
+  $('addInspo').addEventListener('click',addInspo);
+  addInspo(); addInspo();
+
+  // ---- repeatable video rows ----
+  function addVideo(){
+    var row=document.createElement('div'); row.className='row';
+    row.innerHTML='<button type="button" class="del" aria-label="Remove">&times;</button>'
+      +'<div class="f" style="margin:0"><label>Video link</label><input class="v-url" type="url" placeholder="https://youtube.com/watch?v=…"></div>';
+    row.querySelector('.del').onclick=function(){ row.remove(); };
+    $('videoRows').appendChild(row);
+  }
+  $('addVideo').addEventListener('click',addVideo);
+
+  function collectInspo(){ return Array.prototype.map.call($('inspoRows').children,function(r){ return {url:(r.querySelector('.i-url').value||'').trim(), note:(r.querySelector('.i-note').value||'').trim()}; }).filter(function(x){ return x.url; }); }
+  function collectVideos(){ return Array.prototype.map.call($('videoRows').children,function(r){ return (r.querySelector('.v-url').value||'').trim(); }).filter(Boolean); }
+
+  // ---- image compression (same as church intake) ----
+  function readRaw(file,role){ return new Promise(function(res){ var r=new FileReader(); r.onload=function(){ res({role:role,name:file.name,mimeType:file.type||'application/octet-stream',data:String(r.result).split(',')[1]}); }; r.onerror=function(){res(null)}; r.readAsDataURL(file); }); }
+  function compress(file,role,maxDim,quality){
+    return new Promise(function(res){
+      var img=new Image();
+      img.onload=function(){
+        var s=Math.min(1,maxDim/Math.max(img.width,img.height));
+        var w=Math.max(1,Math.round(img.width*s)), hh=Math.max(1,Math.round(img.height*s));
+        var cv=document.createElement('canvas'); cv.width=w; cv.height=hh;
+        cv.getContext('2d').drawImage(img,0,0,w,hh);
+        res({role:role,name:(file.name||'photo').replace(/\.[^.]+$/,'')+'.jpg',mimeType:'image/jpeg',data:cv.toDataURL('image/jpeg',quality).split(',')[1]});
+      };
+      img.onerror=function(){res(null)}; img.src=URL.createObjectURL(file);
+    });
+  }
+  function prep(file,role,o){ return (file.type==='image/svg+xml'||/png/i.test(file.type)||file.size<400*1024) ? readRaw(file,role) : compress(file,role,o.maxDim,o.quality); }
+
+  var errLine=null;
+  function alertLine(msg){ if(!errLine){ errLine=document.createElement('p'); errLine.className='count err'; errLine.style.textAlign='center'; document.querySelector('.actions').prepend(errLine); } errLine.textContent=msg; }
+  function warn(el,msg){ if(el) el.scrollIntoView({behavior:'smooth',block:'center'}); alertLine(msg); }
+
+  // ---- submit ----
+  var busy=false;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault(); if(busy) return;
+    if(errLine){ errLine.remove(); errLine=null; }
+
+    busy=true;
+    var btn=form.querySelector('button[type=submit]'); btn.disabled=true; btn.textContent='Uploading… this can take a moment';
+
+    var payload={};
+    new FormData(form).forEach(function(v,k){ if(typeof v==='string') payload[k]=v; });
+    payload.brandColor = payload.brandColorHex || payload.brandColor; delete payload.brandColorHex;
+    payload.accentColor = payload.accentColorHex || payload.accentColor; delete payload.accentColorHex;
+    payload.pages = ['Home'].concat(checked('pagePicker','data-page'));
+    payload.features = checked('featurePicker','data-feat');
+    payload.inspiration = collectInspo();
+    payload.videos = collectVideos();
+    payload.buildType = 'bespoke';
+
+    // files, role-tagged
+    payload.logoFile = singles.logo ? await prep(singles.logo,'LOGO',{maxDim:900,quality:.92}) : null;
+    var photos=[];
+    if(singles.hero) photos.push(await prep(singles.hero,'HERO',{maxDim:2000,quality:.82}));
+    for(var g=0;g<gallery.length;g++){ photos.push(await prep(gallery[g],'GALLERY-'+(g+1),{maxDim:1600,quality:.82})); }
+    payload.photoFiles = photos.filter(Boolean);
+
+    function done(){ document.body.innerHTML='<div class="thanks wrap"><div class="eyebrow" style="text-align:center">// got it</div><h2>Thank you — we\'re on it.</h2><p>We\'ll build your custom site and email you a preview link to review. If we need anything else to get it right, we\'ll reach out.</p></div>'; window.scrollTo(0,0); }
+    if(!INTAKE_ENDPOINT){ done(); return; }
+    fetch(INTAKE_ENDPOINT,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload)}).then(done).catch(done);
+  });
+})();
+</script>
+</body>
+</html>
